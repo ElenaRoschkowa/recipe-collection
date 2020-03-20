@@ -62,8 +62,8 @@ and open the template in the editor.
         $array=$AllRezepte->SelectAllRezept();
 
         foreach ($array as $row) 
-       
-        echo "<h1><a href='Seite.php?name=".$row." ' style='color: green; font-size: 16pt' id='.$row.' class='tooltipEl'>".$row."</a></h1>"; 
+       // echo '<tr><td><b><a href="Seite.php?name=".$row."  " id="'.$row.'" title=" ">'.$row.'</a></b></td></tr></br>';
+        echo "<h1><a href='Seite.php?name=".$row."  ' style='color: green; font-size: 16pt' id='.$row.' >".$row."</a></h1>"; 
 
         ?>
  </div>
@@ -104,62 +104,26 @@ $('#ud_form2').submit(function(event){
  $('#ud_form')[0].reset(); 
 });
 
-$document.ready(function(){
-$('.hover').tooltip({
-   title: fetchData,
-   html: true,
-   placement: 'right'
-  });
 
-  function fetchData()
-  {
-   var fetch_data = '';
-   var element = $(this);
-   var id = element.attr("id");
-   $.ajax({
-    url:"fetch.php",
-    method:"POST",
-    async: false,
-    data:{id:id},
-    success:function(data)
-    {
-     fetch_data = data;
-    }
-   });   
-   return fetch_data;
+ 
+
+$(document).ready(function(){ 
+
+ $('a').tooltip({
+  classes:{
+   "ui-tooltip":"highlight"
+  },
+  position:{ my:'left center', at:'right+50 center'},
+  content:function(result){
+   $.post('fetch.php', {
+    id:$(this).attr('id')
+   }, function(data){
+    result(data);
+   });
   }
  });
- 
- 
- $(document).ready(function(){
-
-  // Add tooltip
-  $('tooltipEl').tooltip({
-   delay: 500,
-   placement: "bottom",
-   title: userDetails,
-   html: true
-  }); 
-});
-
-// Get user details for tooltip
-function userDetails(){
-  var id = this.id;
-  var split_id = id.split('_');
-  var userid = split_id[1];
-
-  var tooltipText = "";
-  $.ajax({
-   url: 'fetch.php',
-   type: 'post',
-   async: false,
-   data: {userid:userid},
-   success: function(data){
-     tooltipText = data;
-   }
-  });
-  return tooltipText;
-}
+  
+});  
 
 </script>
 

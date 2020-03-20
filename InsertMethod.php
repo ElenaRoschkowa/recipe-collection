@@ -13,7 +13,7 @@ $description=$_POST["description"];
 $InsertRezept=new insert_recipecollection($title,$ingredients,$description);
 
 $InsertRezept->InsertRezept();
-
+$InsertRezept->SelectAllRezept();
 
  
    ?>
