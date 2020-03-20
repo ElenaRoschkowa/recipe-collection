@@ -6,14 +6,27 @@ and open the template in the editor.
 -->
 <html>
    <head>
-       <title>recipe collection</title>
-       <link rel="stylesheet" href="style1.css" type="text/css"></link>
-       <script src ="https://code.jquery.com/jquery-1.12.4.js"></script>
-       <script src ="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-       <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" ></link>
-       <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">   
+        <title>recipe collection</title>
+        
+        <!-- jQuery -->
+        <script src="jquery-3.1.1.min.js" type='text/javascript'></script>
+        <!-- Bootstrap -->
+        <link href='bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+        <script src='bootstrap/js/bootstrap.min.js' type='text/javascript'></script>
+
+        <link href='style1.css' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="style1.css" type="text/css"></link>
+        <script src ="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">  
+        <script src ="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>    
+        
+
    </head>
+   
+ 
    
  
  <div class="header"><h1>Rezepte</h1></div>
@@ -40,6 +53,7 @@ and open the template in the editor.
    </form>
 
  <div class="ud_box" id="ud_output">
+      
         <?php
 
         require_once 'Modell.php';
@@ -48,9 +62,9 @@ and open the template in the editor.
         $array=$AllRezepte->SelectAllRezept();
 
         foreach ($array as $row) 
-        echo "<h1><a href='Seite.php?name=".$row."' style='color: green; font-size: 16pt'>".$row."</a></h1>"; 
-        
-       // echo '<a href="#" id="'.$row.'">'.$row.'<br></a>';
+       
+        echo "<h1><a href='Seite.php?name=".$row." ' style='color: green; font-size: 16pt' id='.$row.' class='tooltipEl'>".$row."</a></h1>"; 
+
         ?>
  </div>
  <form action="Insert_Modell.php" method="POST">
@@ -91,21 +105,62 @@ $('#ud_form2').submit(function(event){
 });
 
 $document.ready(function(){
-    alert("Hello! I am an alert box!!");
-   $('a').tooltip ({
-       classes: {
-           "ui-tooltip":"highlight"
-       },
-       position:{my:'left center',at:'right+50 center'},
-       content :function (result){
-         $.post('fetch.php',{
-             id:$(this).attr('id')
-         }, function (data){
-             result(data);
-         });  
-       }
-   });
+$('.hover').tooltip({
+   title: fetchData,
+   html: true,
+   placement: 'right'
+  });
+
+  function fetchData()
+  {
+   var fetch_data = '';
+   var element = $(this);
+   var id = element.attr("id");
+   $.ajax({
+    url:"fetch.php",
+    method:"POST",
+    async: false,
+    data:{id:id},
+    success:function(data)
+    {
+     fetch_data = data;
+    }
+   });   
+   return fetch_data;
+  }
+ });
+ 
+ 
+ $(document).ready(function(){
+
+  // Add tooltip
+  $('tooltipEl').tooltip({
+   delay: 500,
+   placement: "bottom",
+   title: userDetails,
+   html: true
+  }); 
 });
+
+// Get user details for tooltip
+function userDetails(){
+  var id = this.id;
+  var split_id = id.split('_');
+  var userid = split_id[1];
+
+  var tooltipText = "";
+  $.ajax({
+   url: 'fetch.php',
+   type: 'post',
+   async: false,
+   data: {userid:userid},
+   success: function(data){
+     tooltipText = data;
+   }
+  });
+  return tooltipText;
+}
+
 </script>
 
 
