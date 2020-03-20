@@ -53,7 +53,8 @@ and open the template in the editor.
    </form>
 
  <div class="ud_box" id="ud_output">
-      
+     
+       
         <?php
 
         require_once 'Modell.php';
@@ -62,10 +63,11 @@ and open the template in the editor.
         $array=$AllRezepte->SelectAllRezept();
 
         foreach ($array as $row) 
-       // echo '<tr><td><b><a href="Seite.php?name=".$row."  " id="'.$row.'" title=" ">'.$row.'</a></b></td></tr></br>';
-        echo "<h1><a href='Seite.php?name=".$row."  ' style='color: green; font-size: 16pt' id='.$row.' >".$row."</a></h1>"; 
+        echo '<a href="Seite.php?name='.$row.'  " id='.$row.' style="font-size:16pt;color: green" title=" ">'.$row.'</a></br></br>';
+        //echo "<h1><a href='Seite.php?name=".$row."  ' style='color: green; font-size: 16pt' id='.$row.' >".$row."</a></h1>"; 
 
         ?>
+         
  </div>
  <form action="Insert_Modell.php" method="POST">
  <button type="submit" name="submit" class="button">add_recipes</button>
