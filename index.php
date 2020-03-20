@@ -63,7 +63,7 @@ and open the template in the editor.
         $array=$AllRezepte->SelectAllRezept();
 
         foreach ($array as $row) 
-        echo '<a href="Seite.php?name='.$row.'  " id='.$row.' style="font-size:16pt;color: green" title=" ">'.$row.'</a></br></br>';
+        echo '<h1><a href="Seite.php?name='.$row.'  " id=$row style="font-size:16pt;color: green" title=" ">'.$row.'</a></h1>';
         //echo "<h1><a href='Seite.php?name=".$row."  ' style='color: green; font-size: 16pt' id='.$row.' >".$row."</a></h1>"; 
 
         ?>
