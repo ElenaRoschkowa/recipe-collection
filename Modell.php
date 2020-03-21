@@ -60,6 +60,8 @@ class insert_recipecollection extends recipecollection
         echo "Error: " . self::$connect . "<br>" . self::$connect->error;
         }
         }
+        
+        
     }
     
 }

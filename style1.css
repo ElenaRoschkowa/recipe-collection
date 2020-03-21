@@ -2,6 +2,24 @@
   background-color: #F1F1F1;
   text-align: center;
   padding: 20px;
+  
+}
+
+body, html {
+  height: 100%;
+}
+
+.bg {
+  /* The image used */
+  background-image: url("background.jpg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .topnav {
@@ -31,4 +49,16 @@
  border:1px solid #ccc;
  top:20px;
  left:100px;
+}
+
+.tooltip-inner{
+ text-align: left;
+ max-width: 350px;
+}
+
+main {
+  background-repeat: no-repeat, repeat;
+  height: 80vh;
+  outline: 1px solid;
+  width: 100%;
 }
