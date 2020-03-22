@@ -2,24 +2,7 @@
   background-color: #F1F1F1;
   text-align: center;
   padding: 20px;
-  
-}
-
-body, html {
-  height: 100%;
-}
-
-.bg {
-  /* The image used */
-  background-image: url("background.jpg");
-
-  /* Full height */
-  height: 100%;
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-image:url("image.jpg");
 }
 
 .topnav {
@@ -57,6 +40,8 @@ body, html {
 }
 
 main {
+  background-image:
+  url("image.jpg");
   background-repeat: no-repeat, repeat;
   height: 80vh;
   outline: 1px solid;
